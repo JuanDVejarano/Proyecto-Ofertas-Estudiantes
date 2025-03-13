@@ -77,3 +77,26 @@ Create table Postulacion(
     foreign key (FK_Codigo_Estudiante) references Estudiante(Codigo_Estudiante),
     foreign key (FK_Codigo_Oferta) references Ofertas_De_Empleo(Codigo)
 );
+
+insert into Cargo (Nombre) VALUES ('Decano');
+insert into Cargo (Nombre) VALUES ('Secretaria');
+
+insert into Empleado (Cedula, Nombre, Apellido, Celular, correo, FK_IdCargo) VALUES (1, 'Juan', 'Perez', '1234567890', 'jperez@ucentral.edu.co', 1);
+insert into Empleado (Cedula, Nombre, Apellido, Celular, correo, FK_IdCargo) VALUES (2, 'Viviana', 'Morales', '1234567890', 'vmorales@ucentral.edu.co', 1);
+insert into Empleado (Cedula, Nombre, Apellido, Celular, correo, FK_IdCargo) VALUES (3, 'Maria', 'Gomez', '1234567890', 'mgomez@ucentral.edu.ci', 2);
+insert into Empleado (Cedula, Nombre, Apellido, Celular, correo, FK_IdCargo) VALUES (4, 'Paula', 'Garzon', '1234567890', 'pgarzon@ucentral.edu.co', 2);
+
+insert into Estudiante (Codigo_Estudiante, Nombre, Apellido, Fecha_Nacimiento, email, curriculum, Grado_de_avance) VALUES (1, 'Pedro', 'Gomez', '01/01/2000', 'pgomez@ucentral.edu.co', 'Curriculum', 'Grado de avance');
+insert into Estudiante (Codigo_Estudiante, Nombre, Apellido, Fecha_Nacimiento, email, curriculum, Grado_de_avance) VALUES (2, 'Juan', 'Gomez', '01/01/2000', 'jgomez@ucentral.edu.co', 'Curriculum', 'Grado de avance');
+
+insert into Departamento (Nombre, FK_idDecano) VALUES ('Ingenieria', 1);
+insert into Departamento (Nombre, FK_idDecano) VALUES ('Ciencias', 2);
+
+insert into Oficina_de_trabajo (Id, FK_idSecretaria, FK_idDepartamento) VALUES (1010, 4, 1);
+insert into Oficina_de_trabajo (Id, FK_idSecretaria, FK_idDepartamento) VALUES (2020, 3, 2);
+
+insert into Estudiante_Oficina (FK_Codigo_Estudiante, FK_idOficina) VALUES (1, 1010);
+insert into Estudiante_Oficina (FK_Codigo_Estudiante, FK_idOficina) VALUES (1, 2020);
+insert into Estudiante_Oficina (FK_Codigo_Estudiante, FK_idOficina) VALUES (2, 2020);
+
+select TOF.id as CodigoOficina, TD.Nombre as NombreDepartamento, TEM.Nombre || ' ' || TEM.Apellido as Decano  from Estudiante TE inner join Estudiante_Oficina TEO on TE.Codigo_Estudiante = TEO.FK_Codigo_Estudiante inner join Oficina_de_trabajo TOF on TEO.FK_idOficina = TOF.Id inner join Departamento TD on TOF.FK_idDepartamento = TD.Id inner join Empleado TEM on TD.FK_idDecano = TEM.Cedula where TE.Codigo_Estudiante = 1;

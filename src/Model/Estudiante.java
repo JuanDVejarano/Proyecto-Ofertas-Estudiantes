@@ -111,6 +111,27 @@ public class Estudiante extends Conexion{
             return false;
         }
     }
-    //#endregion
 
+    public boolean agregarOficinaEstudiante(int FK_idOficina){
+        try {
+            String sql = "INSERT INTO Estudiante_Oficina (FK_Codigo_Estudiante, FK_idOficina) VALUES (" + this.Codigo_Estudiante + ", " + FK_idOficina + ")";
+            this.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para insertar datos" + e.getMessage());
+            return false;
+        }
+    }
+
+    public ArrayList<String[]> obtenerOficinasInscritasDelEstudiante(){
+        ArrayList<String[]> oficinasEstudiante = null;
+        try {
+            String sql = "select TOF.id as CodigoOficina, TD.Nombre as NombreDepartamento, TEM.Nombre || ' ' || TEM.Apellido as Decano  from Estudiante TE inner join Estudiante_Oficina TEO on TE.Codigo_Estudiante = TEO.FK_Codigo_Estudiante inner join Oficina_de_trabajo TOF on TEO.FK_idOficina = TOF.Id inner join Departamento TD on TOF.FK_idDepartamento = TD.Id inner join Empleado TEM on TD.FK_idDecano = TEM.Cedula where TE.Codigo_Estudiante = " + this.Codigo_Estudiante;
+            oficinasEstudiante = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return oficinasEstudiante;
+    }
+    //#endregion
 }
