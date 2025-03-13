@@ -48,7 +48,7 @@ public class Conexion {
         }
     }
 
-    protected ArrayList<String[]> executeQuery(String sql) {
+    protected ArrayList<String[]> executeSearch(String sql) {
         ResultSet rs = null;
         Connection conn = null;
         ArrayList<String[]> resultList = new ArrayList<>();
