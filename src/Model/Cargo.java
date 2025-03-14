@@ -31,17 +31,11 @@ public class Cargo extends Conexion {
     //#endregion
 
     //#region Metodos
-    public ArrayList<Cargo> obtenerCargos() {
-        ArrayList<Cargo> cargos = new ArrayList<>();
+    public ArrayList<String[]> obtenerCargos() {
+        ArrayList<String[]> cargos = null;
         try {
             String sql = "SELECT * FROM Cargo";
-            ArrayList<String[]> resultList = this.executeSearch(sql);
-            for (String[] result : resultList) {
-                Cargo cargo = new Cargo();
-                cargo.setId(Integer.parseInt(result[0]));
-                cargo.setNombre(result[1]);
-                cargos.add(cargo);
-            }
+            cargos = this.executeSearch(sql);
         } catch (Exception e) {
             System.out.println("Error en el metodo para optener datos" + e.getMessage());
         }

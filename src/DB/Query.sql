@@ -100,3 +100,6 @@ insert into Estudiante_Oficina (FK_Codigo_Estudiante, FK_idOficina) VALUES (1, 2
 insert into Estudiante_Oficina (FK_Codigo_Estudiante, FK_idOficina) VALUES (2, 2020);
 
 select TOF.id as CodigoOficina, TD.Nombre as NombreDepartamento, TEM.Nombre || ' ' || TEM.Apellido as Decano  from Estudiante TE inner join Estudiante_Oficina TEO on TE.Codigo_Estudiante = TEO.FK_Codigo_Estudiante inner join Oficina_de_trabajo TOF on TEO.FK_idOficina = TOF.Id inner join Departamento TD on TOF.FK_idDepartamento = TD.Id inner join Empleado TEM on TD.FK_idDecano = TEM.Cedula where TE.Codigo_Estudiante = 1;
+
+SELECT * FROM Empleado WHERE Correo = 'asdf' and Cedula NOT IN (123);
+SELECT * FROM Empleado WHERE Cedula NOT IN (123);

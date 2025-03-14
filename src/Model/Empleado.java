@@ -106,6 +106,17 @@ public class Empleado extends Conexion {
         return empleados;
     }
 
+    public ArrayList<String[]> obtenerEmpleadoCedula() {
+        ArrayList<String[]> empleados = null;
+        try {
+            String sql = "SELECT TE.Cedula, TE.Nombre, TE.Apellido, TE.Celular, TE.Correo, TC.Nombre FROM Empleado as TE INNER JOIN Cargo as TC ON TE.FK_IdCargo = TC.Id WHERE TE.Cedula = " + this.cedula;
+            empleados = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return empleados;
+    }
+
     public ArrayList<String[]> obtenerDecano() {
             ArrayList<String[]> empleados = null;
         try {
@@ -126,6 +137,32 @@ public class Empleado extends Conexion {
             System.out.println("Error en el metodo para optener datos" + e.getMessage());
         }
         return empleados;
+    }
+
+    public boolean existeCorreo() {
+        try {
+            String sql = "SELECT * FROM Empleado WHERE Correo = '" + this.correo + "'";
+            if (this.executeSearch(sql).size() > 0) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para verificar si existe el empleado" + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean existeCorreo(int id) {
+        try {
+            String sql = "SELECT * FROM Empleado WHERE Correo = '" + this.correo + "' and Cedula NOT IN (" + id + ")";
+            if (this.executeSearch(sql).size() > 0) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para verificar si existe el empleado" + e.getMessage());
+            return false;
+        }
     }
     //#endregion
 }
