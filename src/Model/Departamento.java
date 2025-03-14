@@ -72,6 +72,17 @@ public class Departamento extends Conexion{
         return resultList;
     }
 
+    public ArrayList<String[]> obtenerDepartamentosCB() {
+        ArrayList<String[]> resultList = null;
+        try {
+            String sql = "SELECT TD.Id, TD.Nombre FROM Departamento TD";
+            resultList = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return resultList;
+    }
+
     public ArrayList<String[]> obtenerDepartamentoNombre(String nombre){
         ArrayList<String[]> resultList = null;
         try {

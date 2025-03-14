@@ -128,6 +128,17 @@ public class Empleado extends Conexion {
         return empleados;
     }
 
+    public ArrayList<String[]> obtenerSecretarias() {
+        ArrayList<String[]> empleados = null;
+        try {
+            String sql = "SELECT TE.Cedula, TE.Nombre || ' ' || TE.Apellido FROM Empleado as TE where TE.FK_IdCargo = 2";
+            empleados = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return empleados;
+    }
+
     public ArrayList<String[]> obtenerDecanoNombre(String nombre) {
         ArrayList<String[]> empleados = null;
         try {

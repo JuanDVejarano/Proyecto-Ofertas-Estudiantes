@@ -317,6 +317,7 @@ public class panelDepartamento extends javax.swing.JInternalFrame {
         };
         modelo.addColumn("Id Departamento");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Cedula Decano");
         modelo.addColumn("Nombre Decano");
          for (String[] row : listaDepartamento) {
             modelo.addRow(row);

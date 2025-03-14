@@ -103,3 +103,5 @@ select TOF.id as CodigoOficina, TD.Nombre as NombreDepartamento, TEM.Nombre || '
 
 SELECT * FROM Empleado WHERE Correo = 'asdf' and Cedula NOT IN (123);
 SELECT * FROM Empleado WHERE Cedula NOT IN (123);
+
+SELECT TOF.id, DEP.Id, DEP.Nombre, SEC.Cedula, SEC.Nombre || ' ' || SEC.Apellido FROM Oficina_de_trabajo TOF INNER JOIN Departamento DEP ON TOF.FK_idDepartamento = DEP.id INNER JOIN Empleado SEC ON TOF.FK_idSecretaria = SEC.Cedula

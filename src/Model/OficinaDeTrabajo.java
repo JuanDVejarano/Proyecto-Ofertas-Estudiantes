@@ -42,7 +42,7 @@ public class OficinaDeTrabajo extends Conexion{
     public ArrayList<String[]> obtenerOficinasDeTrabajo() {
         ArrayList<String[]> oficinasDeTrabajo = null;
         try {
-            String sql = "SELECT * FROM OficinaDeTrabajo";
+            String sql = "SELECT TOF.id, DEP.Id, DEP.Nombre, SEC.Cedula, SEC.Nombre || ' ' || SEC.Apellido FROM Oficina_de_trabajo TOF INNER JOIN Departamento DEP ON TOF.FK_idDepartamento = DEP.id INNER JOIN Empleado SEC ON TOF.FK_idSecretaria = SEC.Cedula";
             oficinasDeTrabajo = this.executeSearch(sql);
         } catch (Exception e) {
             System.out.println("Error en el metodo para optener datos" + e.getMessage());
@@ -82,6 +82,7 @@ public class OficinaDeTrabajo extends Conexion{
             return false;
         }
     }
+
     //#endregion
 
 }
