@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Departamento extends Conexion{
+
+    
     //#region Constructores
     public Departamento() {
         super();
@@ -51,7 +53,7 @@ public class Departamento extends Conexion{
 
     public boolean actualizarDepartamento() {
         try {
-            this.executeUpdate("UPDATE Departamento SET nombre = '" + this.getNombre() + "', FK_idDecano = " + this.getFK_idDecano() + " WHERE idDepartamento = " + this.getIdDepartamento());
+            this.executeUpdate("UPDATE Departamento SET nombre = '" + this.getNombre() + "', FK_idDecano = " + this.getFK_idDecano() + " WHERE Id = " + this.getIdDepartamento());
             return true;
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -62,12 +64,33 @@ public class Departamento extends Conexion{
     public ArrayList<String[]> obtenerDepartamentos() {
         ArrayList<String[]> resultList = null;
         try {
-            String sql = "SELECT * FROM Departamento TD inner join Empleado TE on TD.FK_idDecano = TE.cedula";
+            String sql = "SELECT TD.Id, TD.Nombre, TE.Cedula,  TE.Nombre || ' ' || TE.Apellido FROM Departamento TD inner join Empleado TE on TD.FK_idDecano = TE.cedula";
             resultList = this.executeSearch(sql);
         } catch (Exception e) {
             System.out.println("Error en el metodo para optener datos" + e.getMessage());
         }
         return resultList;
+    }
+
+    public ArrayList<String[]> obtenerDepartamentoNombre(String nombre){
+        ArrayList<String[]> resultList = null;
+        try {
+            String sql = "SELECT TD.Id, TD.Nombre, TE.Cedula, TE.Nombre || ' ' || TE.Apellido FROM Departamento TD inner join Empleado TE on TD.FK_idDecano = TE.cedula where TD.Nombre like '%" + nombre + "%'";
+            resultList = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return resultList;
+    }
+
+    public boolean eliminarDepartamento() {
+        try {
+            this.executeUpdate("DELETE FROM Departamento WHERE Id = " + this.getIdDepartamento());
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return false;
+        }
     }
     //#endregion
 }

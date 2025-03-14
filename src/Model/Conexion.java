@@ -15,7 +15,6 @@ public class Conexion {
             String url = "jdbc:sqlite:src/DB/OfertaEstudiantes.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-            System.out.println("Conecion a la base de datos establecida.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -27,7 +26,6 @@ public class Conexion {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
-                System.out.println("Conexion a la base de datos cerrada.");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

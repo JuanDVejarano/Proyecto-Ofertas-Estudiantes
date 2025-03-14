@@ -105,5 +105,27 @@ public class Empleado extends Conexion {
         }
         return empleados;
     }
+
+    public ArrayList<String[]> obtenerDecano() {
+            ArrayList<String[]> empleados = null;
+        try {
+            String sql = "SELECT TE.Cedula, TE.Nombre || ' ' || TE.Apellido, TE.Celular, TE.Correo FROM Empleado as TE where TE.FK_IdCargo = 1";
+            empleados = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return empleados;
+    }
+
+    public ArrayList<String[]> obtenerDecanoNombre(String nombre) {
+        ArrayList<String[]> empleados = null;
+        try {
+            String sql = "SELECT TE.Cedula, TE.Nombre || ' ' || TE.Apellido, TE.Celular, TE.Correo FROM Empleado as TE where TE.FK_IdCargo = 1 and TE.Nombre like '%" + nombre + "%'";
+            empleados = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return empleados;
+    }
     //#endregion
 }
