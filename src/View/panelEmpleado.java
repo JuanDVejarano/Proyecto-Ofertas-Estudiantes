@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author juliethosuna
+ * @author Juan D Vejarano
  */
 public class panelEmpleado extends javax.swing.JInternalFrame {
 
