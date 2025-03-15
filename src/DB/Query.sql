@@ -105,3 +105,9 @@ SELECT * FROM Empleado WHERE Correo = 'asdf' and Cedula NOT IN (123);
 SELECT * FROM Empleado WHERE Cedula NOT IN (123);
 
 SELECT TOF.id, DEP.Id, DEP.Nombre, SEC.Cedula, SEC.Nombre || ' ' || SEC.Apellido FROM Oficina_de_trabajo TOF INNER JOIN Departamento DEP ON TOF.FK_idDepartamento = DEP.id INNER JOIN Empleado SEC ON TOF.FK_idSecretaria = SEC.Cedula
+
+--delete from Estudiante_Oficina where id = 4;
+--delete from Estudiante_Oficina where id = 5;
+
+select COUNT(*) as TotalRecords from Estudiante_Oficina where FK_Codigo_Estudiante = 1 and FK_idOficina = 1010;
+select * from Estudiante_Oficina where FK_Codigo_Estudiante = 1 and FK_idOficina = 1010;

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Juan D Vejarano
+ * @author juan D Vejarano
  */
 public class index extends javax.swing.JFrame {
 
@@ -41,6 +41,7 @@ public class index extends javax.swing.JFrame {
         itemDepartamentos = new javax.swing.JMenuItem();
         itemOficinas = new javax.swing.JMenuItem();
         itemGEstiduantes = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         itemGOfertas = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -97,6 +98,15 @@ public class index extends javax.swing.JFrame {
         jMenuBar1.add(itemGEmpleados);
 
         itemGEstiduantes.setText("Gestion Estudiantes");
+
+        jMenuItem2.setText("Estudiantes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        itemGEstiduantes.add(jMenuItem2);
+
         jMenuBar1.add(itemGEstiduantes);
 
         itemGOfertas.setText("Gestion Ofertas");
@@ -139,6 +149,12 @@ public class index extends javax.swing.JFrame {
        boxMain.add(view);
        view.show();
     }//GEN-LAST:event_itemDepartamentosActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        panelEstudiantes view = new panelEstudiantes();
+        boxMain.add(view);
+        view.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +203,7 @@ public class index extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;

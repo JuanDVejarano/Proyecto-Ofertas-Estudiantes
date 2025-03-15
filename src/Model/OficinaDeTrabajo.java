@@ -50,6 +50,18 @@ public class OficinaDeTrabajo extends Conexion{
         return oficinasDeTrabajo;
     }
 
+    public ArrayList<String[]> obtenerOficinaDeTrabajoId() {
+        ArrayList<String[]> oficinaDeTrabajo = null;
+        try {
+            String sql = "SELECT id FROM Oficina_de_trabajo";
+            oficinaDeTrabajo = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return oficinaDeTrabajo;
+        
+    }
+
     public boolean insertarOficinaDeTrabajo() {
         try {
             String sql = "INSERT INTO OficinaDeTrabajo (id, FK_idSecretaria, FK_idDepartamento) VALUES (" + this.id + ", " + this.FK_idSecretaria + ", " + this.FK_idDepartamento + ")";

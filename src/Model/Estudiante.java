@@ -2,7 +2,7 @@ package src.Model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 
 public class Estudiante extends Conexion{
 
@@ -79,9 +79,27 @@ public class Estudiante extends Conexion{
         return estudiantes;
     }
 
+    public boolean existeEstudiante() {
+        try {
+            String sql = "SELECT * FROM Estudiante WHERE Codigo_Estudiante = " + this.Codigo_Estudiante;
+            ArrayList<String[]> estudiante = this.executeSearch(sql);
+            if (estudiante.size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+            return false;
+        }
+    }
+
     public boolean insertarEstudiante() {
         try {
-            String sql = "INSERT INTO Estudiante (Codigo_Estudiante, Nombre, Apellidos, Fecha_Nacimiento, email, curriculum, gradoDeAvance) VALUES (" + this.Codigo_Estudiante + ", '" + this.Nombre + "', '" + this.Apellidos + "', '" + this.Fecha_Nacimiento + "', '" + this.email + "', '" + this.curriculum + "', '" + this.gradoDeAvance + "')";
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            String fechaNacimientoFormatted = sdf.format(this.Fecha_Nacimiento);
+            String sql = "INSERT INTO Estudiante (Codigo_Estudiante, Nombre, Apellido, Fecha_Nacimiento, email, curriculum, Grado_de_avance) VALUES (" + this.Codigo_Estudiante + ", '" + this.Nombre + "', '" + this.Apellidos + "', '" + fechaNacimientoFormatted + "', '" + this.email + "', '" + this.curriculum + "', '" + this.gradoDeAvance + "')";
+            System.out.println(sql);
             this.executeUpdate(sql);
             return true;
         } catch (Exception e) {
@@ -92,7 +110,9 @@ public class Estudiante extends Conexion{
 
     public boolean actualizarEstudiante() {
         try {
-            String sql = "UPDATE Estudiante SET Nombre = '" + this.Nombre + "', Apellidos = '" + this.Apellidos + "', Fecha_Nacimiento = '" + this.Fecha_Nacimiento + "', email = '" + this.email + "', curriculum = '" + this.curriculum + "', gradoDeAvance = '" + this.gradoDeAvance + "' WHERE Codigo_Estudiante = " + this.Codigo_Estudiante;
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            String fechaNacimientoFormatted = sdf.format(this.Fecha_Nacimiento);
+            String sql = "UPDATE Estudiante SET Nombre = '" + this.Nombre + "', Apellido = '" + this.Apellidos + "', Fecha_Nacimiento = '" + fechaNacimientoFormatted + "', email = '" + this.email + "', curriculum = '" + this.curriculum + "', Grado_de_avance = '" + this.gradoDeAvance + "' WHERE Codigo_Estudiante = " + this.Codigo_Estudiante;
             this.executeUpdate(sql);
             return true;
         } catch (Exception e) {
@@ -132,6 +152,32 @@ public class Estudiante extends Conexion{
             System.out.println("Error en el metodo para optener datos" + e.getMessage());
         }
         return oficinasEstudiante;
+    }
+
+    public boolean verificaResgitroDuplicado(int FK_idOficina){
+        try {
+            String sql = "select * from Estudiante_Oficina where FK_Codigo_Estudiante =" + this.Codigo_Estudiante + " and FK_idOficina = " + FK_idOficina;
+            ArrayList<String[]> estudiante = this.executeSearch(sql);
+            if (estudiante.size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+            return false;
+        }
+    }
+
+    public ArrayList<String[]> obtenerEstudianteNombre(String nombre){
+        ArrayList<String[]> resultList = null;
+        try {
+            String sql = "SELECT * FROM Estudiante WHERE Nombre like '%" + nombre + "%'";
+            resultList = this.executeSearch(sql);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para optener datos" + e.getMessage());
+        }
+        return resultList;
     }
     //#endregion
 }
